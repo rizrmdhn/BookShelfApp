@@ -7,9 +7,8 @@ import DisplayHeader from "./components/DisplayHeader";
 import "./styles/styles.css";
 import BookShelfApp from "./components/BookShelfApp";
 import ReadBookContainer from "./components/ReadBookContainer";
-import qs from "qs";
 
-const api = "http://localhost:5000/";
+const api = " https://bookshelfapi-hapi.herokuapp.com/";
 
 class App extends React.Component {
   constructor(props) {
@@ -130,6 +129,7 @@ class App extends React.Component {
     this.setState({ books });
   };
 
+
   render() {
     return (
       <div className="App">
@@ -171,6 +171,7 @@ class App extends React.Component {
                 <FinishedBookContainer
                   books={this.state.books}
                   onReading={this.onReadingHandler}
+                  onDelete={this.onDeleteHandler}
                 />
               }
             />

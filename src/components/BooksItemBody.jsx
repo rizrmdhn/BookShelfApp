@@ -47,13 +47,20 @@ function BooksItemBody({
           >
             {publisher}
           </CardSubtitle>
+          <CardText>{summary}</CardText>
           <CardText>
-            {summary}
+            {books.reading === "true" ? (
+              <span>Lokasi buku ada di rak Reading</span>
+            ) : books.finished === "true" ? (
+              <span>Lokasi buku ada di rak Selesai</span>
+            ) : (
+              <span>Lokasi buku ada di rak Daftar Buku</span>
+            )}
           </CardText>
           <div className="book-item__action">
             {books.reading === "true" ? (
               <Button
-                className="m-auto ms-4"
+                className="ms-4"
                 color="success"
                 tag="input"
                 type="button"
@@ -62,7 +69,7 @@ function BooksItemBody({
               />
             ) : books.finished === "true" ? (
               <Button
-                className="m-auto ms-4"
+                className="ms-4 me-3"
                 color="warning"
                 tag="input"
                 type="button"
@@ -71,7 +78,7 @@ function BooksItemBody({
               />
             ) : (
               <Button
-                className="m-auto ms-4"
+                className="ms-4 ms-4"
                 color="warning"
                 tag="input"
                 type="button"
@@ -81,7 +88,7 @@ function BooksItemBody({
             )}
 
             <Button
-              className="m-auto ms-4"
+              className="ms-4 me-3"
               color="danger"
               tag="input"
               type="button"

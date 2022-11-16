@@ -1,9 +1,8 @@
 import axios from "axios";
 import React from "react";
-import { nanoid } from "nanoid";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Card } from "reactstrap";
 
-const api = "http://localhost:5000/";
+const api = "https://bookshelfapi-hapi.herokuapp.com/";
 
 class BookShelfApp extends React.Component {
   constructor(props) {
@@ -33,7 +32,7 @@ class BookShelfApp extends React.Component {
     this.onBookReadPageChangeHandler =
       this.onBookReadPageChangeHandler.bind(this);
     this.onChangeReadingStatus = this.onChangeReadingStatus.bind(this);
-    
+
     this.onSubmitChangeEventHandler =
       this.onSubmitChangeEventHandler.bind(this);
   }
@@ -127,101 +126,107 @@ class BookShelfApp extends React.Component {
             response: json.data.books,
           });
         }
-        console.log(this.state, "<== from booshelfapp");
       });
   }
 
   render() {
     return (
       <div className="BookShelfApp">
-        <Form onSubmit={this.onSubmitChangeEventHandler}>
-          <FormGroup>
-            <Label for="Book-Title">Book Title</Label>
-            <Input
-              id="Book-Title"
-              name="Book-Title"
-              placeholder="Book Title"
-              onChange={this.onBookTitleChangeHandler}
-              value={this.state.name}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="Book-Year">Book Year</Label>
-            <Input
-              id="Book-Year"
-              name="Book-Year"
-              placeholder="Book Year"
-              type="text"
-              onChange={this.onBookYearChangeHandler}
-              value={this.state.year}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="Book-Author">Book Author</Label>
-            <Input
-              id="Book-Author"
-              name="Book-Author"
-              placeholder="Book Author"
-              type="text"
-              onChange={this.onBookAuthorChangeHandler}
-              value={this.state.author}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="Book-Summary">Book Summary</Label>
-            <Input
-              id="Book-Summary"
-              name="Book-Summary"
-              placeholder="Book Summary"
-              type="text"
-              onChange={this.onBookSummaryChangeHandler}
-              value={this.state.summary}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="Book-Publisher">Book Publisher</Label>
-            <Input
-              id="Book-Publisher"
-              name="Book-Publisher"
-              placeholder="Book Publisher"
-              type="text"
-              onChange={this.onBookPublisherChangeHandler}
-              value={this.state.publisher}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="Book-pageCount">Book Total Page</Label>
-            <Input
-              id="Book-pageCount"
-              name="Book-pageCount"
-              placeholder="Book pageCount"
-              type="number"
-              onChange={this.onBookPageCountChangeHandler}
-              value={this.state.pageCount}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="Book-readPage">Book Total Readed Page</Label>
-            <Input
-              id="Book-readPage"
-              name="Book-readPage"
-              placeholder="Book readPage"
-              type="number"
-              onChange={this.onBookReadPageChangeHandler}
-              value={this.state.readPage}
-            />
-          </FormGroup>
-          <FormGroup switch>
-            <Input
-              type="switch"
-              role="switch"
-              onChange={this.onChangeReadingStatus}
-              value={this.state.reading}
-            />
-            <Label check>Reading ?</Label>
-          </FormGroup>
-          <Button color="primary" tag="input" type="submit" value="Submit" />
-        </Form>
+        <Card
+          className="m-auto mt-3 mb-3"
+          style={{
+            width: "500px",
+          }}
+        >
+          <Form onSubmit={this.onSubmitChangeEventHandler} className="m-5">
+            <FormGroup className="m-auto mb-3">
+              <Label for="Book-Title">Book Title</Label>
+              <Input
+                id="Book-Title"
+                name="Book-Title"
+                placeholder="Book Title"
+                onChange={this.onBookTitleChangeHandler}
+                value={this.state.name}
+              />
+            </FormGroup>
+            <FormGroup className="m-auto mb-3">
+              <Label for="Book-Year">Book Year</Label>
+              <Input
+                id="Book-Year"
+                name="Book-Year"
+                placeholder="Book Year"
+                type="text"
+                onChange={this.onBookYearChangeHandler}
+                value={this.state.year}
+              />
+            </FormGroup>
+            <FormGroup className="m-auto mb-3">
+              <Label for="Book-Author">Book Author</Label>
+              <Input
+                id="Book-Author"
+                name="Book-Author"
+                placeholder="Book Author"
+                type="text"
+                onChange={this.onBookAuthorChangeHandler}
+                value={this.state.author}
+              />
+            </FormGroup>
+            <FormGroup className="m-auto mb-3">
+              <Label for="Book-Summary">Book Summary</Label>
+              <Input
+                id="Book-Summary"
+                name="Book-Summary"
+                placeholder="Book Summary"
+                type="text"
+                onChange={this.onBookSummaryChangeHandler}
+                value={this.state.summary}
+              />
+            </FormGroup>
+            <FormGroup className="m-auto mb-3">
+              <Label for="Book-Publisher">Book Publisher</Label>
+              <Input
+                id="Book-Publisher"
+                name="Book-Publisher"
+                placeholder="Book Publisher"
+                type="text"
+                onChange={this.onBookPublisherChangeHandler}
+                value={this.state.publisher}
+              />
+            </FormGroup>
+            <FormGroup className="m-auto mb-3">
+              <Label for="Book-pageCount">Book Total Page</Label>
+              <Input
+                id="Book-pageCount"
+                name="Book-pageCount"
+                placeholder="Book pageCount"
+                type="number"
+                onChange={this.onBookPageCountChangeHandler}
+                value={this.state.pageCount}
+              />
+            </FormGroup>
+            <FormGroup className="m-auto mb-3">
+              <Label for="Book-readPage">Book Total Readed Page</Label>
+              <Input
+                id="Book-readPage"
+                name="Book-readPage"
+                placeholder="Book readPage"
+                type="number"
+                onChange={this.onBookReadPageChangeHandler}
+                value={this.state.readPage}
+              />
+            </FormGroup>
+            <FormGroup switch className="m-auto mb-3">
+              <Input
+                type="switch"
+                role="switch"
+                onChange={this.onChangeReadingStatus}
+                value={this.state.reading}
+              />
+              <Label check>Reading ?</Label>
+            </FormGroup>
+            <Button color="primary" tag="input" type="submit" value="Submit" />
+          </Form>
+        </Card>
       </div>
     );
   }
