@@ -104,8 +104,7 @@ class BookShelfApp extends React.Component {
     });
   }
 
-  onSubmitChangeEventHandler(event) {
-    event.perventDefault();
+  onSubmitChangeEventHandler() {
     this.props.addbook(this.state);
 
     axios
