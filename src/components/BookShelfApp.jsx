@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { Button, Form, FormGroup, Label, Input, Card } from "reactstrap";
 
-const api = "http://localhost:5000/";
+const api = "https://bookshelfapi-hapi.herokuapp.com/";
 const MySwal = withReactContent(Swal);
 
 class BookShelfApp extends React.Component {
