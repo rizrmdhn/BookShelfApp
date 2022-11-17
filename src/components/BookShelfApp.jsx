@@ -1,8 +1,11 @@
 import axios from "axios";
 import React from "react";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import { Button, Form, FormGroup, Label, Input, Card } from "reactstrap";
 
-const api = "https://bookshelfapi-hapi.herokuapp.com/";
+const api = "http://localhost:5000/";
+const MySwal = withReactContent(Swal);
 
 class BookShelfApp extends React.Component {
   constructor(props) {
@@ -102,7 +105,7 @@ class BookShelfApp extends React.Component {
   }
 
   onSubmitChangeEventHandler(event) {
-    event.preventDefault();
+    event.perventDefault();
     this.props.addbook(this.state);
 
     axios
@@ -117,14 +120,18 @@ class BookShelfApp extends React.Component {
         reading: this.state.reading,
       })
       .then((json) => {
-        if (json.data.status === 200) {
-          this.setState({
-            response: json.data.books,
-          });
+        if (json.data.status === 'success') {
+          MySwal.fire({
+            title: this.state.name,
+            html: <i>Berhasil ditambahkan</i>,
+            icon: "success",
+          })
         } else {
-          this.setState({
-            response: json.data.books,
-          });
+          MySwal.fire({
+            title: this.state.name,
+            html: <i>Gagal ditambahkan</i>,
+            icon: "error",
+          })
         }
       });
   }
