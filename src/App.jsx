@@ -10,7 +10,7 @@ import ReadBookContainer from "./components/ReadBookContainer";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-const api = " https://bookshelfapi-hapi.herokuapp.com//";
+const api = " https://bookshelfapi-hapi.herokuapp.com/";
 const MySwal = withReactContent(Swal);
 
 class App extends React.Component {
