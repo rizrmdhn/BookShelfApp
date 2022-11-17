@@ -71,7 +71,8 @@ class App extends React.Component {
     });
   }
 
-  onReadingHandler = async (id) => {
+  onReadingHandler = async (id, event) => {
+    event.perventDefault();
     const datas = await axios
       .get(api + `books/${id}`)
       .then((res) => res.data.data.book);
@@ -108,7 +109,8 @@ class App extends React.Component {
     this.setState({ ReadBook });
   };
 
-  onFinishedHandler = async (id) => {
+  onFinishedHandler = async (id, event) => {
+    event.perventDefault();
     const datas = await axios
       .get(api + `books/${id}`)
       .then((res) => res.data.data.book);
