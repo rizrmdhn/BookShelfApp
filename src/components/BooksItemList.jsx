@@ -2,7 +2,7 @@ import React from "react";
 import { CardGroup } from "reactstrap";
 import BooksItem from "./BooksItem";
 
-function BooksItemList({ books, onDelete, onFinished, onReading }) {
+function BooksItemList({ books, onDelete, onFinished, onReading, onEdit, name }) {
   return (
     <>
       {books.length !== 0 ? (
@@ -16,6 +16,7 @@ function BooksItemList({ books, onDelete, onFinished, onReading }) {
                 onDelete={onDelete}
                 onFinished={onFinished}
                 onReading={onReading}
+                onEdit={onEdit}
                 {...book}
               />
             ))}

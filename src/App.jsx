@@ -9,8 +9,10 @@ import BookShelfApp from "./components/BookShelfApp";
 import ReadBookContainer from "./components/ReadBookContainer";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import EditBookContainer from "./components/EditBookContainer";
 
 const api = " https://bookshelfapi-hapi.herokuapp.com/";
+//const api = "http://localhost:5000/";
 const MySwal = withReactContent(Swal);
 
 class App extends React.Component {
@@ -18,12 +20,14 @@ class App extends React.Component {
     super(props);
     this.state = {
       books: [],
+      editBooks: [],
     };
 
     this.onAddBookHandler = this.onAddBookHandler.bind(this);
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.onReadingHandler = this.onReadingHandler.bind(this);
     this.onFinishedHandler = this.onFinishedHandler.bind(this);
+    this.onGetBookId = this.onGetBookId.bind(this);
     this.getDataFromApi = this.getDataFromApi.bind(this);
   }
 
@@ -32,6 +36,7 @@ class App extends React.Component {
       const bookdata = res.data.data.books;
       this.setState({
         books: bookdata,
+        editBooks: bookdata,
       });
     });
   };
@@ -70,6 +75,14 @@ class App extends React.Component {
       };
     });
   }
+
+  onGetBookId = async (id) => {
+     await axios.get(api + `books/${id}`).then((res) => {
+      this.setState({
+        editBooks: res.data.data.books,
+      });
+    });
+  };
 
   onReadingHandler = async (id) => {
     const datas = await axios
@@ -126,7 +139,7 @@ class App extends React.Component {
         finished: true,
       })
       .then((json) => {
-        if (json.data.status === 'success') {
+        if (json.data.status === "success") {
           MySwal.fire({
             html: <i>Berhasil ditambahkan ke daftar Selesai dibaca</i>,
             icon: "success",
@@ -167,11 +180,11 @@ class App extends React.Component {
           })
           .then((json) => {
             if (json.data.status === "success") {
-              MySwal.fire("Deleted!", "Your file has been deleted.", "success");
+              MySwal.fire("Deleted!", json.data.message, "success");
             } else {
               MySwal.fire({
                 title: id,
-                html: <i>Gagal dihapus</i>,
+                html: <i>{json.data.message}</i>,
                 icon: "error",
               });
             }
@@ -202,6 +215,7 @@ class App extends React.Component {
                   onDelete={this.onDeleteHandler}
                   onReading={this.onReadingHandler}
                   onFinished={this.onFinishedHandler}
+                  onEdit={this.onGetBookId}
                 />
               }
             />
@@ -213,6 +227,7 @@ class App extends React.Component {
                   books={this.state.books}
                   onFinished={this.onFinishedHandler}
                   onDelete={this.onDeleteHandler}
+                  onEdit={this.onGetBookId}
                 />
               }
             />
@@ -224,9 +239,11 @@ class App extends React.Component {
                   books={this.state.books}
                   onReading={this.onReadingHandler}
                   onDelete={this.onDeleteHandler}
+                  onEdit={this.onGetBookId}
                 />
               }
             />
+            <Route exact path="/Edit" element={<EditBookContainer books={this.state.editBooks} />} />
           </Routes>
         </HashRouter>
       </div>

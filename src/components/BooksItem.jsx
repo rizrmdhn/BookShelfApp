@@ -12,6 +12,7 @@ function BooksItem({
   onDelete,
   onFinished,
   onReading,
+  onEdit,
 }) {
   return (
     <div className="book-item ms-4 me-4 mt-4 mb-4">
@@ -26,6 +27,7 @@ function BooksItem({
         onDelete={onDelete}
         onReading={onReading}
         onFinished={onFinished}
+        onEdit={onEdit}
       />
     </div>
   );

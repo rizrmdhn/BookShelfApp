@@ -39,4 +39,11 @@ body {
 .btn {
   transition: 500ms;
 }
+.edit-icon {
+  position: absolute;
+  cursor: pointer;
+}
+.form-check-input {
+  cursor: pointer;
+}
 

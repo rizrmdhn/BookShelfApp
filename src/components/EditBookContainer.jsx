@@ -1,29 +1,32 @@
-import axios from "axios";
 import React from "react";
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
+import withReactContent from "sweetalert2-react-content";
+import axios from "axios";
+import Swal from "sweetalert2";
 import { Button, Form, FormGroup, Label, Input, Card } from "reactstrap";
 
 const api = "https://bookshelfapi-hapi.herokuapp.com/";
 //const api = "http://localhost:5000/";
 const MySwal = withReactContent(Swal);
 
-class BookShelfApp extends React.Component {
+class EditBookContainer extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      name: "",
-      year: "",
-      author: "",
-      summary: "",
-      publisher: "",
-      pageCount: "",
-      readPage: "",
-      response: "",
-      reading: false,
+      id: this.props.books[0].id,
+      name: this.props.books[0].name,
+      year: this.props.books[0].year,
+      author: this.props.books[0].author,
+      summary: this.props.books[0].summary,
+      publisher: this.props.books[0].publisher,
+      pageCount: this.props.books[0].pageCount,
+      readPage: this.props.books[0].readPage,
+      reading: (this.props.books[0].reading === "true"),
+      finished: (this.props.books[0].finished === "true"),
+      
     };
 
+    this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onChangeReadingStatus = this.onChangeReadingStatus.bind(this);
 
     this.onSubmitChangeEventHandler =
@@ -31,9 +34,8 @@ class BookShelfApp extends React.Component {
   }
 
   onChangeHandler = (event) => {
-    this.setState({[event.target.name] : event.target.value});
-  }
-
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   onChangeReadingStatus() {
     this.setState(() => {
@@ -45,10 +47,9 @@ class BookShelfApp extends React.Component {
 
   onSubmitChangeEventHandler(event) {
     event.preventDefault();
-    this.props.addbook(this.state);
-
     axios
-      .post(api + "books", {
+      .put(api + `books/${this.state.id}`, {
+        id: this.state.id,
         name: this.state.name,
         year: this.state.year,
         author: this.state.author,
@@ -57,27 +58,26 @@ class BookShelfApp extends React.Component {
         pageCount: this.state.pageCount,
         readPage: this.state.readPage,
         reading: this.state.reading,
+        finished: this.state.finished,
       })
       .then((json) => {
-        if (json.data.status === 'success') {
+        if (json.data.status === "success") {
           MySwal.fire({
-            title: this.state.name,
-            html: <i>Berhasil ditambahkan</i>,
+            html: <i>{json.data.message}</i>,
             icon: "success",
-          })
+          });
         } else {
           MySwal.fire({
-            title: this.state.name,
-            html: <i>Gagal ditambahkan</i>,
+            html: <i>{json.data.message}</i>,
             icon: "error",
-          })
+          });
         }
       });
   }
 
   render() {
     return (
-      <div className="BookShelfApp">
+      <div>
         <Card
           className="m-auto mt-3 mb-3"
           style={{
@@ -179,4 +179,4 @@ class BookShelfApp extends React.Component {
   }
 }
 
-export default BookShelfApp;
+export default EditBookContainer;
