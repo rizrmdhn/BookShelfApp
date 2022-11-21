@@ -13,8 +13,8 @@ import {
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-//const api = "https://bookshelfapi-hapi.herokuapp.com/";
-const api = "http://localhost:5000/";
+const api = "https://bookshelfapi-hapi.herokuapp.com/";
+//const api = "http://localhost:5000/";
 const MySwal = withReactContent(Swal);
 
 function ReadingBookComponent() {
@@ -25,7 +25,6 @@ function ReadingBookComponent() {
       const bookdata = res.data.data.books;
       setAPIData(bookdata.filter((book) => book.reading === "true"));
     });
-    console.log(APIData);
   }, []);
 
   const setData = (books) => {
