@@ -116,6 +116,7 @@ body {
   }
   .responsive-menu {
     display: block;
+    margin: auto 5px;
   }
   .books-item__card {
     margin: auto;

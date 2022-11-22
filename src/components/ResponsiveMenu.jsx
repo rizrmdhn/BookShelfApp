@@ -13,7 +13,7 @@ function ResponsiveMenu() {
   return (
     <div className="responsive-menu">
       <button
-        className="btn d-lg-none mt-4 me-4"
+        className="btn d-lg-none"
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasResponsive"
