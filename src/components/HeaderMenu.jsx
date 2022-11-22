@@ -7,9 +7,6 @@ function HeaderMenu(props) {
     <div className="top-menu">
       <Nav>
         <Nav.Item>
-          <Link to="/Booklist">Booklist</Link>
-        </Nav.Item>
-        <Nav.Item>
           <Link to="/Reading">Reading</Link>
         </Nav.Item>
         <Nav.Item>

@@ -16,7 +16,6 @@ export default function App() {
         <DisplayHeader />
         <Routes>
           <Route exact path="/" element={<AddBooksComponent />} />
-          <Route exact path="/Booklist" element={<BookListComponents/>} />
           <Route exact path="/Edit" element={<UpdateBooksComponents/>} />
           <Route exact path="/Reading" element={<ReadingBookComponent />} />
           <Route exact path="/Finished" element={<FinishedBookComponent />} />

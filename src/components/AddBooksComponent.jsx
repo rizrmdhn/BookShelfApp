@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { Button, Form, FormGroup, Label, Input, Card } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Card, CardText, CardHeader } from "reactstrap";
 import { useNavigate } from 'react-router';
+import BookListComponents from "./BookListComponents";
 
 
 const api = "https://bookshelfapi-hapi.herokuapp.com/";
@@ -42,7 +43,7 @@ function AddBooksComponent() {
             html: <i>Berhasil ditambahkan</i>,
             icon: "success",
           });
-          navigateTo('/Booklist');
+          navigateTo('/');
         } else {
           MySwal.fire({
             title: bookTitle,
@@ -54,14 +55,13 @@ function AddBooksComponent() {
   };
 
   return (
-    <div className="BookShelfApp">
+    <>
+    <div className="BookShelfApp container-fluid">
       <Card
-        className="m-auto mt-3 mb-3"
-        style={{
-          width: "500px",
-        }}
+        className="Bookshelf-card container-fluid"
       >
-        <Form className="m-5">
+        <h1 className="bookshelf-title ms-4 mt-4">Add your book</h1>
+        <Form className="m-4">
           <FormGroup className="m-auto mb-3">
             <Label for="Book-Title">Book Title</Label>
             <Input
@@ -149,7 +149,9 @@ function AddBooksComponent() {
           />
         </Form>
       </Card>
+      <BookListComponents />
     </div>
+    </>
   );
 }
 

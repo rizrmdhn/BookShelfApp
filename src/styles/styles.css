@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 * {
   padding: 0;
   margin: 0;
@@ -6,7 +6,7 @@
 body {
   background-color: white;
   color: black;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 .Header {
   display: flex;
@@ -16,7 +16,8 @@ body {
   font-size: 25px;
 }
 .header-title {
-  margin: auto 45px;
+  margin: auto;
+  margin-left: 10px;
 }
 .header-title > a {
   text-decoration: none;
@@ -36,6 +37,41 @@ body {
   background-color: white;
   padding: 20px;
 }
+.responsive-menu {
+  display: none;
+}
+.BookShelfApp {
+  display: flex;
+  margin: 60px 40px;
+}
+.BookShelfApp > .Bookshelf-card {
+  width: 600px;
+  margin: auto;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+.booklist-container > .Booklist-card {
+  margin: auto;
+}
+.book-item {
+  margin: 25px 15px;
+}
+.bookshelf-title {
+  position: relative;
+}
+.Booklist-card {
+  overflow-y: scroll;
+}
+.books-item__card {
+  width: 300px;
+  height: 370px;
+}
+.booklists-title {
+  position: relative;
+  margin: auto;
+  margin-top: 25px;
+  margin-left: 50px;
+}
 .btn {
   transition: 500ms;
 }
@@ -43,7 +79,140 @@ body {
   position: absolute;
   cursor: pointer;
 }
+.book-item__action {
+  margin: auto;
+}
+.book-item__action > .finished {
+  margin: auto;
+  margin-left: 25px;
+  font-size: 20px;
+}
+.book-item__action > .read {
+  margin: auto;
+  margin-left: 25px;
+  font-size: 20px;
+}
+.book-item__action > .delete {
+  margin: auto;
+  margin-left: 25px;
+  font-size: 20px;
+}
 .form-check-input {
   cursor: pointer;
 }
 
+@media screen and (max-width: 1300px) {
+  .BookShelfApp {
+    display: inline;
+  }
+  .Bookshelf-card {
+    margin: auto !important;
+  }
+}
+
+@media screen and (max-width: 990px) {
+  .top-menu {
+    display: none;
+  }
+  .responsive-menu {
+    display: block;
+  }
+  .books-item__card {
+    margin: auto;
+    width: 250px;
+  }
+  .edit-icon {
+    width: 8px;
+    height: 8px;
+  }
+  .book-icon {
+    width: 64px;
+    height: 64px;
+  }
+  .books-item__name {
+    font-size: 15px;
+  }
+  .books-item__publisher {
+    font-size: 15px;
+  }
+  .card-text {
+    font-size: 15px;
+  }
+  .book-item__action {
+    margin: auto;
+  }
+  .book-item__action > .finished {
+    margin: auto;
+    margin-left: 10px;
+    font-size: 15px;
+  }
+  .book-item__action > .read {
+    margin: auto;
+    margin-left: 15px;
+    font-size: 15px;
+  }
+  .book-item__action > .delete {
+    margin: auto;
+    margin-left: 15px;
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .offcanvas-body {
+    flex-grow: 1;
+    padding: 10px !important;
+    overflow-y: auto;
+  }
+  li.mt-2.nav-item {
+    margin: 15px 0;
+    font-size: 20px;
+  }
+  li.mt-2.nav-item:hover {
+    font-size: 25px;
+  }
+  .BookShelfApp > .Bookshelf-card {
+    width: 350px;
+  }
+  .booklist-container > .Booklist-card {
+    margin: auto;
+  }
+  .books-item__card {
+    width: 240px;
+  }
+  .edit-icon {
+    width: 8px;
+    height: 8px;
+  }
+  .book-icon {
+    width: 64px;
+    height: 64px;
+  }
+  .books-item__name {
+    font-size: 15px;
+  }
+  .books-item__publisher {
+    font-size: 15px;
+  }
+  .card-text {
+    font-size: 15px;
+  }
+  .book-item__action {
+    margin: auto;
+  }
+  .book-item__action > .finished {
+    margin: auto;
+    margin-left: 5px;
+    font-size: 15px;
+  }
+  .book-item__action > .read {
+    margin: auto;
+    margin-left: 15px;
+    font-size: 15px;
+  }
+  .book-item__action > .delete {
+    margin: auto;
+    margin-left: 15px;
+    font-size: 15px;
+  }
+}
