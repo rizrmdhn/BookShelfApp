@@ -109,6 +109,15 @@ function BookListComponents() {
         reading: true,
         finished: false,
       })
+      .catch(function (error) {
+        if (error.response) {
+          MySwal.fire({
+            icon: "error",
+            title: "Fail",
+            text: error.response.data.message,
+          });
+        } 
+      })
       .then((json) => {
         if (json.data.status === "success") {
           MySwal.fire({
@@ -116,11 +125,6 @@ function BookListComponents() {
             icon: "success",
           });
           getData();
-        } else {
-          MySwal.fire({
-            html: <i>Gagal ditambahkan ke daftar Reading</i>,
-            icon: "error",
-          });
         }
       });
   };

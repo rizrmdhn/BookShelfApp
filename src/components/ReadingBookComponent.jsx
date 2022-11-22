@@ -145,16 +145,19 @@ function ReadingBookComponent() {
             data: data,
             headers: { "Content-type": "application/x-www-form-urlencoded" },
           })
+          .catch(function (error) {
+            if (error.response) {
+              MySwal.fire({
+                icon: "error",
+                title: "Fail",
+                text: error.response.data.message,
+              });
+            } 
+          })
           .then((json) => {
             if (json.data.status === "success") {
               MySwal.fire("Deleted!", json.data.message, "success");
               getData();
-            } else {
-              MySwal.fire({
-                title: id,
-                html: <i>{json.data.message}</i>,
-                icon: "error",
-              });
             }
           });
       }

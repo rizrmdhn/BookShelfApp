@@ -60,6 +60,7 @@ body {
   position: relative;
 }
 .Booklist-card {
+  height: 750px;
   overflow-y: scroll;
 }
 .books-item__card {

@@ -32,8 +32,8 @@ function UpdateBooksComponents() {
     setBookPublisher(localStorage.getItem("Book-Publisher"));
     setBookPageCount(localStorage.getItem("Book-PageCount"));
     setBookReadPage(localStorage.getItem("Book-ReadPage"));
-    setBookReading(localStorage.getItem("Book-Reading"));
-    setbookFinished(localStorage.getItem("Book-Finished"));
+    setBookReading(localStorage.getItem("Book-Reading") === 'true');
+    setbookFinished(localStorage.getItem("Book-Finished") === 'true');
   }, []);
 
   const updateData = (event) => {
@@ -48,7 +48,16 @@ function UpdateBooksComponents() {
         pageCount: bookPageCount,
         readPage: bookReadPage,
         reading: bookReading,
-        finished: bookFinished === "true",
+        finished: bookFinished,
+      })
+      .catch(function (error) {
+        if (error.response) {
+          MySwal.fire({
+            icon: "error",
+            title: "Fail",
+            text: error.response.data.message,
+          });
+        }
       })
       .then((json) => {
         if (json.data.status === "success") {
@@ -56,12 +65,7 @@ function UpdateBooksComponents() {
             html: <i>{json.data.message}</i>,
             icon: "success",
           });
-          navigateTo("/Booklist");
-        } else {
-          MySwal.fire({
-            html: <i>{json.data.message}</i>,
-            icon: "error",
-          });
+          navigateTo("/");
         }
       });
   };
@@ -155,8 +159,8 @@ function UpdateBooksComponents() {
             <Input
               type="switch"
               role="switch"
-              checked={bookReading === "true"}
-              onChange={(e) => setBookReading(!bookReading)}
+              checked={bookReading}
+              onChange={() => setBookReading(!bookReading)}
               value={bookReading}
             />
             <Label check>Reading ?</Label>
