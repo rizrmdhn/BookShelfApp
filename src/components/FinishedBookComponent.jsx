@@ -60,6 +60,15 @@ function FinishedBookComponent() {
   };
 
   const onFinished = async (id) => {
+    MySwal.fire({
+      title: "Please Wait !",
+      html: "Adding To Finished List", // add html attribute if you want or remove
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      willOpen: () => {
+        MySwal.showLoading();
+      },
+    });
     const datas = await axios
       .get(api + `books/${id}`)
       .then((res) => res.data.data.book);
@@ -76,23 +85,36 @@ function FinishedBookComponent() {
         reading: false,
         finished: true,
       })
+      .catch(function (error) {
+        if (error.response) {
+          MySwal.fire({
+            icon: "error",
+            title: "Fail",
+            text: error.response.data.message,
+          });
+        }
+      })
       .then((json) => {
         if (json.data.status === "success") {
           MySwal.fire({
-            html: <i>Berhasil ditambahkan ke daftar Reading</i>,
+            html: <i>Berhasil ditambahkan ke daftar selesai dibaca</i>,
             icon: "success",
           });
           getData();
-        } else {
-          MySwal.fire({
-            html: <i>Gagal ditambahkan ke daftar Reading</i>,
-            icon: "error",
-          });
         }
       });
   };
 
   const onRead = async (id) => {
+    MySwal.fire({
+      title: "Please Wait !",
+      html: "Adding To Read List", // add html attribute if you want or remove
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      willOpen: () => {
+        MySwal.showLoading();
+      },
+    });
     const datas = await axios
       .get(api + `books/${id}`)
       .then((res) => res.data.data.book);
@@ -109,6 +131,15 @@ function FinishedBookComponent() {
         reading: true,
         finished: false,
       })
+      .catch(function (error) {
+        if (error.response) {
+          MySwal.fire({
+            icon: "error",
+            title: "Fail",
+            text: error.response.data.message,
+          });
+        }
+      })
       .then((json) => {
         if (json.data.status === "success") {
           MySwal.fire({
@@ -116,11 +147,6 @@ function FinishedBookComponent() {
             icon: "success",
           });
           getData();
-        } else {
-          MySwal.fire({
-            html: <i>Gagal ditambahkan ke daftar Reading</i>,
-            icon: "error",
-          });
         }
       });
   };
@@ -140,24 +166,30 @@ function FinishedBookComponent() {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
+        MySwal.fire({
+          title: "Please Wait !",
+          html: "Deleting Book", // add html attribute if you want or remove
+          allowOutsideClick: false,
+          showConfirmButton: false,
+          willOpen: () => {
+            MySwal.showLoading();
+          },
+        });
         axios
           .delete(api + `books/${id}`, {
             data: data,
             headers: { "Content-type": "application/x-www-form-urlencoded" },
           })
-          .catch(function (error) {
-            if (error.response) {
-              MySwal.fire({
-                icon: "error",
-                title: "Fail",
-                text: error.response.data.message,
-              });
-            }
-          })
           .then((json) => {
             if (json.data.status === "success") {
               MySwal.fire("Deleted!", json.data.message, "success");
               getData();
+            } else {
+              MySwal.fire({
+                title: id,
+                html: <i>{json.data.message}</i>,
+                icon: "error",
+              });
             }
           });
       }

@@ -33,6 +33,15 @@ function AddBooksComponent() {
 
   const postData = (event) => {
     event.preventDefault();
+    MySwal.fire({
+      title: "Please Wait !",
+      html: "Adding To Book", // add html attribute if you want or remove
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      willOpen: () => {
+        MySwal.showLoading();
+      },
+    });
     axios
       .post(api + "books", {
         name: bookTitle,
@@ -51,7 +60,7 @@ function AddBooksComponent() {
             title: "Fail",
             text: error.response.data.message,
           });
-        } 
+        }
       })
       .then((res) => {
         if (res.data.status === "success") {
@@ -59,11 +68,13 @@ function AddBooksComponent() {
             title: bookTitle,
             html: <i>Berhasil ditambahkan</i>,
             icon: "success",
-          });
+          }).then((result) => {
+            if(result.isConfirmed) {
+              window.location.reload(false);
+            }
+          })
         }
-      })
-      // TODO FIX RESPONSE FOR FAIL
-      
+      });
   };
 
   return (
