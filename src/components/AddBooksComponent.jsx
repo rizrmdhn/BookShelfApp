@@ -143,7 +143,7 @@ function AddBooksComponent() {
               <Input
                 id="Book-readPage"
                 name="readPage"
-                placeholder="Enter the number readed book page"
+                placeholder="Enter the number readed page"
                 type="number"
                 onChange={(e) => setBookReadPage(e.target.value)}
               />
