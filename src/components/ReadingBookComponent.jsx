@@ -21,9 +21,9 @@ function ReadingBookComponent() {
   const [APIData, setAPIData] = useState([]);
 
   useEffect(() => {
-    axios.get(api + "books").then((res) => {
+    axios.get(api + "books?reading=1").then((res) => {
       const bookdata = res.data.data.books;
-      setAPIData(bookdata.filter((book) => book.reading === "true"));
+      setAPIData(bookdata);
     });
   }, []);
 
@@ -53,7 +53,7 @@ function ReadingBookComponent() {
   };
 
   const getData = () => {
-    axios.get(api + "books").then((getData) => {
+    axios.get(api + "books?reading=1").then((getData) => {
       const bookdata = getData.data.data.books;
       setAPIData(bookdata.filter((book) => book.reading === "true"));
     });
@@ -81,9 +81,8 @@ function ReadingBookComponent() {
         summary: datas.summary,
         publisher: datas.publisher,
         pageCount: datas.pageCount,
-        readPage: datas.readPage,
+        readPage: datas.pageCount,
         reading: false,
-        finished: true,
       })
       .catch(function (error) {
         if (error.response) {
@@ -127,9 +126,8 @@ function ReadingBookComponent() {
         summary: datas.summary,
         publisher: datas.publisher,
         pageCount: datas.pageCount,
-        readPage: datas.readPage,
+        readPage: 0,
         reading: true,
-        finished: false,
       })
       .catch(function (error) {
         if (error.response) {

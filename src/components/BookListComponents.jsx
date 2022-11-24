@@ -68,7 +68,7 @@ function BookListComponents() {
       willOpen: () => {
         MySwal.showLoading();
       },
-    })
+    });
     const datas = await axios
       .get(api + `books/${id}`)
       .then((res) => res.data.data.book);
@@ -81,9 +81,8 @@ function BookListComponents() {
         summary: datas.summary,
         publisher: datas.publisher,
         pageCount: datas.pageCount,
-        readPage: datas.readPage,
+        readPage: datas.pageCount,
         reading: false,
-        finished: true,
       })
       .catch(function (error) {
         if (error.response) {
@@ -114,7 +113,7 @@ function BookListComponents() {
       willOpen: () => {
         MySwal.showLoading();
       },
-    })
+    });
     const datas = await axios
       .get(api + `books/${id}`)
       .then((res) => res.data.data.book);
@@ -127,9 +126,8 @@ function BookListComponents() {
         summary: datas.summary,
         publisher: datas.publisher,
         pageCount: datas.pageCount,
-        readPage: datas.readPage,
+        readPage: 0,
         reading: true,
-        finished: false,
       })
       .catch(function (error) {
         if (error.response) {
@@ -174,7 +172,7 @@ function BookListComponents() {
           willOpen: () => {
             MySwal.showLoading();
           },
-        })
+        });
         axios
           .delete(api + `books/${id}`, {
             data: data,
@@ -248,13 +246,17 @@ function BookListComponents() {
                       </CardSubtitle>
                       <CardText>{books.summary}</CardText>
                       <CardText>
-                        {books.reading === "true" ? (
+                        {books.reading && books.finished === "true" ? (
                           <span>
-                            <span className="text-muted">Status:</span> Reading
+                            <span className="text-muted">Status:</span> Finished
                           </span>
                         ) : books.finished === "true" ? (
                           <span>
                             <span className="text-muted">Status:</span> Finished
+                          </span>
+                        ) : books.reading === "true" ? (
+                          <span>
+                            <span className="text-muted">Status:</span> Reading
                           </span>
                         ) : (
                           <span>
@@ -264,14 +266,14 @@ function BookListComponents() {
                         )}
                       </CardText>
                       <div className="book-item__action">
-                        {books.reading === "true" ? (
+                        {books.reading && books.finished === "true" ? (
                           <Button
-                            className="finished"
-                            color="success"
+                            className="read"
+                            color="warning"
                             tag="input"
                             type="button"
-                            value="Finished"
-                            onClick={() => onFinished(books.id)}
+                            value="Read"
+                            onClick={() => onRead(books.id)}
                           />
                         ) : books.finished === "true" ? (
                           <Button
@@ -281,6 +283,15 @@ function BookListComponents() {
                             type="button"
                             value="Read"
                             onClick={() => onRead(books.id)}
+                          />
+                        ) : books.reading === "true" ? (
+                          <Button
+                            className="finished"
+                            color="success"
+                            tag="input"
+                            type="button"
+                            value="Finished"
+                            onClick={() => onFinished(books.id)}
                           />
                         ) : (
                           <Button
@@ -292,7 +303,6 @@ function BookListComponents() {
                             onClick={() => onRead(books.id)}
                           />
                         )}
-
                         <Button
                           className="delete"
                           color="danger"

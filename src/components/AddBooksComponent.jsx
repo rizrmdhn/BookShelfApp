@@ -9,10 +9,7 @@ import {
   Label,
   Input,
   Card,
-  CardText,
-  CardHeader,
 } from "reactstrap";
-import { useNavigate } from "react-router";
 import BookListComponents from "./BookListComponents";
 
 const api = "https://bookshelfapi-hapi.herokuapp.com/";
@@ -20,15 +17,14 @@ const api = "https://bookshelfapi-hapi.herokuapp.com/";
 const MySwal = withReactContent(Swal);
 
 function AddBooksComponent() {
-  let navigateTo = useNavigate();
 
   const [bookTitle, setBookTitle] = useState("");
-  const [bookYear, setBookYear] = useState("");
+  const [bookYear, setBookYear] = useState(0);
   const [bookAuthor, setBookAuthor] = useState("");
   const [bookSummary, setBookSummary] = useState("");
   const [bookPublisher, setBookPublisher] = useState("");
-  const [bookPageCount, setBookPageCount] = useState("");
-  const [bookReadPage, setBookReadPage] = useState("");
+  const [bookPageCount, setBookPageCount] = useState(0);
+  const [bookReadPage, setBookReadPage] = useState(0);
   const [bookReading, setBookReading] = useState(false);
 
   const postData = (event) => {
@@ -45,12 +41,12 @@ function AddBooksComponent() {
     axios
       .post(api + "books", {
         name: bookTitle,
-        year: bookYear,
+        year: parseInt(bookYear),
         author: bookAuthor,
         summary: bookSummary,
         publisher: bookPublisher,
-        pageCount: bookPageCount,
-        readPage: bookReadPage,
+        pageCount: parseInt(bookPageCount),
+        readPage: parseInt(bookReadPage),
         reading: bookReading,
       })
       .catch(function (error) {
@@ -81,73 +77,73 @@ function AddBooksComponent() {
     <>
       <div className="BookShelfApp container-fluid">
         <Card className="Bookshelf-card container-fluid">
-          <h1 className="bookshelf-title ms-4 mt-4">Add your book</h1>
+          <h1 className="bookshelf-title m-auto mt-4">Add Book</h1>
           <Form className="m-4">
             <FormGroup className="m-auto mb-3">
-              <Label for="Book-Title">Book Title</Label>
+              <Label for="Book-Title">Title</Label>
               <Input
                 id="Book-Title"
                 name="name"
-                placeholder="Book Title"
+                placeholder="Enter the book title"
                 onChange={(e) => setBookTitle(e.target.value)}
               />
             </FormGroup>
             <FormGroup className="m-auto mb-3">
-              <Label for="Book-Year">Book Year</Label>
+              <Label for="Book-Year">Year Release</Label>
               <Input
                 id="Book-Year"
                 name="year"
-                placeholder="Book Year"
+                placeholder="Enter the book year release"
                 type="text"
                 onChange={(e) => setBookYear(e.target.value)}
               />
             </FormGroup>
             <FormGroup className="m-auto mb-3">
-              <Label for="Book-Author">Book Author</Label>
+              <Label for="Book-Author">Author</Label>
               <Input
                 id="Book-Author"
                 name="author"
-                placeholder="Book Author"
+                placeholder="Enter the book author"
                 type="text"
                 onChange={(e) => setBookAuthor(e.target.value)}
               />
             </FormGroup>
             <FormGroup className="m-auto mb-3">
-              <Label for="Book-Summary">Book Summary</Label>
+              <Label for="Book-Summary">Summary</Label>
               <Input
                 id="Book-Summary"
                 name="summary"
-                placeholder="Book Summary"
+                placeholder="Enter the book summary"
                 type="text"
                 onChange={(e) => setBookSummary(e.target.value)}
               />
             </FormGroup>
             <FormGroup className="m-auto mb-3">
-              <Label for="Book-Publisher">Book Publisher</Label>
+              <Label for="Book-Publisher">Publisher</Label>
               <Input
                 id="Book-Publisher"
                 name="publisher"
-                placeholder="Book Publisher"
+                placeholder="Enter the book publisher"
                 type="text"
                 onChange={(e) => setBookPublisher(e.target.value)}
               />
             </FormGroup>
             <FormGroup className="m-auto mb-3">
-              <Label for="Book-pageCount">Book Total Page</Label>
+              <Label for="Book-pageCount">Total Page</Label>
               <Input
                 id="Book-pageCount"
                 name="pageCount"
-                placeholder="Book pageCount"
+                placeholder="Enter the total book page"
                 type="number"
                 onChange={(e) => setBookPageCount(e.target.value)}
               />
             </FormGroup>
             <FormGroup className="m-auto mb-3">
-              <Label for="Book-readPage">Book Total Readed Page</Label>
+              <Label for="Book-readPage">Readed Page</Label>
               <Input
                 id="Book-readPage"
                 name="readPage"
-                placeholder="Book readPage"
+                placeholder="Enter the number readed book page"
                 type="number"
                 onChange={(e) => setBookReadPage(e.target.value)}
               />
@@ -160,9 +156,10 @@ function AddBooksComponent() {
                 onChange={(e) => setBookReading(!bookReading)}
                 value={bookReading}
               />
-              <Label check>Reading ?</Label>
+              <Label check>Reading the book ?</Label>
             </FormGroup>
             <Button
+              className="m-auto"
               color="primary"
               tag="input"
               type="submit"
