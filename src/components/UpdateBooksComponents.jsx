@@ -12,6 +12,7 @@ const MySwal = withReactContent(Swal);
 //TODO FIX WHEN READING AND FINISHED TRUE
 
 function UpdateBooksComponents() {
+  
   let navigateTo = useNavigate();
 
   const [id, setID] = useState(null);
@@ -82,14 +83,9 @@ function UpdateBooksComponents() {
   };
 
   return (
-    <div className="EditBookForms">
-      <Card
-        className="m-auto mt-3 mb-3"
-        style={{
-          width: "500px",
-        }}
-      >
-        <h1 className="editbook-title m-auto mt-4">Edit Book</h1>
+    <div className="BookShelfApp container-fluid">
+      <Card className="Bookshelf-card container-fluid">
+        <h1 className="bookshelf-title m-auto mt-4">Edit Book</h1>
         <Form className="m-4">
           <FormGroup className="m-auto mb-3">
             <Label for="Book-Title">Title</Label>
