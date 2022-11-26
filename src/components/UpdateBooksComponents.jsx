@@ -83,8 +83,8 @@ function UpdateBooksComponents() {
   };
 
   return (
-    <div className="BookShelfApp container-fluid">
-      <Card className="Bookshelf-card container-fluid">
+    <div className="BookShelfApp edit-container container-fluid">
+      <Card className="Bookshelf-card container-fluid m-auto">
         <h1 className="bookshelf-title m-auto mt-4">Edit Book</h1>
         <Form className="m-4">
           <FormGroup className="m-auto mb-3">
