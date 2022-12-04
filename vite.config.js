@@ -7,6 +7,6 @@ export default defineConfig({
     host: true,
     port: process.env.PORT,
   },
-  base: '/BookShelfApp/',
+  base: '/',
   plugins: [react()]
 })
